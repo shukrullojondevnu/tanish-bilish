@@ -1,5 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreateRoleDto, UpdateRoleDto } from '@app/share';
+import {
+  CreateRoleDto,
+  PaginationSearchI,
+  Role,
+  UpdateRoleDto,
+} from '@app/share';
 import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()
@@ -10,8 +15,8 @@ export class RolesService {
     return this.client.send('createRole', createRoleDto);
   }
 
-  findAll() {
-    return `This action returns all roles`;
+  findAll(query: PaginationSearchI<Role>) {
+    return this.client.send('findAllRoles', query);
   }
 
   findOne(id: number) {

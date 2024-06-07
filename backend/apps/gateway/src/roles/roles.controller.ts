@@ -6,9 +6,15 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { RolesService } from './roles.service';
-import { CreateRoleDto, UpdateRoleDto } from '@app/share';
+import {
+  CreateRoleDto,
+  PaginationSearchI,
+  Role,
+  UpdateRoleDto,
+} from '@app/share';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('roles')
@@ -22,8 +28,8 @@ export class RolesController {
   }
 
   @Get()
-  findAll() {
-    return this.rolesService.findAll();
+  findAll(@Query() query: PaginationSearchI<Role>) {
+    return this.rolesService.findAll(query);
   }
 
   @Get(':id')

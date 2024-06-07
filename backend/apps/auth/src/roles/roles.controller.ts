@@ -1,27 +1,27 @@
 import { Controller } from '@nestjs/common';
-import {
-  Ctx,
-  MessagePattern,
-  NatsContext,
-  Payload,
-} from '@nestjs/microservices';
+import { MessagePattern, Payload } from '@nestjs/microservices';
 import { RolesService } from './roles.service';
-import { CreateRoleDto, UpdateRoleDto, PaginationSearchI } from '@app/share';
-import { Role } from './entities/role.entity';
+import {
+  CreateRoleDto,
+  UpdateRoleDto,
+  PaginationSearchI,
+  Role,
+} from '@app/share';
 
 @Controller()
 export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
 
   @MessagePattern('createRole')
-  create(@Payload() createRoleDto: CreateRoleDto, @Ctx() context: NatsContext) {
-    console.log(context);
+  create(@Payload() createRoleDto: CreateRoleDto) {
     return this.rolesService.create(createRoleDto);
   }
 
   @MessagePattern('findAllRoles')
   findAll(@Payload() query: PaginationSearchI<Role>) {
-    return this.rolesService.findAll(query);
+    console.log(query);
+    return 'asdf';
+    // return this.rolesService.findAll(query);
   }
 
   @MessagePattern('findOneRole')

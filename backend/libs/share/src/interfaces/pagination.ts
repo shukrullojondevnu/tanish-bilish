@@ -5,9 +5,9 @@ export interface PaginationI<T> {
   data: T;
 }
 
-export interface PaginationSearchI<T> {
+export type PaginationSearchI<T> = {
   page: number;
   skip: number;
   take: number;
   where: T;
-}
+};

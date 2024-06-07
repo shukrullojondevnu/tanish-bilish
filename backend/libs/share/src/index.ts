@@ -11,3 +11,7 @@ export * from './dtos/user/update-user.dto';
 // Role dto
 export * from './dtos/role/create-role.dto';
 export * from './dtos/role/update-role.dto';
+
+// * Entities
+export * from './entities/role.entity';
+export * from './entities/user.entity';

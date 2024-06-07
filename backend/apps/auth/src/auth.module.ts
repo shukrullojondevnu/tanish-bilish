@@ -3,9 +3,8 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './users/entities/user.entity';
 import { RolesModule } from './roles/roles.module';
-import { Role } from './roles/entities/role.entity';
+import { User, Role } from '@app/share';
 
 @Module({
   imports: [
