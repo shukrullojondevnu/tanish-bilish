@@ -19,9 +19,7 @@ export class RolesController {
 
   @MessagePattern('findAllRoles')
   findAll(@Payload() query: PaginationSearchI<Role>) {
-    console.log(query);
-    return 'asdf';
-    // return this.rolesService.findAll(query);
+    return this.rolesService.findAll(query);
   }
 
   @MessagePattern('findOneRole')
