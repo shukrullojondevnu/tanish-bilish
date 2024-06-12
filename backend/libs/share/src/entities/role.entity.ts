@@ -13,7 +13,7 @@ export class Role {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column({ type: 'enum', enum: Roles, default: Roles.USER })
+  @Column({ type: 'enum', enum: Roles, default: Roles.USER, unique: true })
   value: Roles;
 
   @ManyToMany(() => User, (user) => user.roles, { cascade: true })

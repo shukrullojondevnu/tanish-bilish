@@ -15,3 +15,5 @@ export * from './dtos/role/update-role.dto';
 // * Entities
 export * from './entities/role.entity';
 export * from './entities/user.entity';
+
+export * from './functions';
