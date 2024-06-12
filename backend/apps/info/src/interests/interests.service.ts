@@ -2,32 +2,39 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import {
-  Role,
-  CreateRoleDto,
+  Interest,
+  CreateInterestDto,
   PaginationSearchI,
-  UpdateRoleDto,
+  UpdateInterestDto,
   findAll,
 } from '@app/share';
 
 @Injectable()
-export class RolesService {
-  constructor(@InjectRepository(Role) private repository: Repository<Role>) {}
+export class InterestsService {
+  constructor(
+    @InjectRepository(Interest) private repository: Repository<Interest>,
+  ) {}
 
-  async create(createItemDto: CreateRoleDto): Promise<Role> {
+  async create(createItemDto: CreateInterestDto): Promise<Interest> {
     return this.repository.save(createItemDto);
   }
 
-  async findAll(query: PaginationSearchI<Role>): Promise<[Role[], number]> {
+  async findAll(
+    query: PaginationSearchI<Interest>,
+  ): Promise<[Interest[], number]> {
     const { where, take, page } = query;
 
     return findAll(this.repository, where, take, page);
   }
 
-  async findOne(id: number): Promise<Role | null> {
+  async findOne(id: number): Promise<Interest | null> {
     return this.repository.findOneBy({ id });
   }
 
-  async update(id: number, updateItemDto: UpdateRoleDto): Promise<Role> {
+  async update(
+    id: number,
+    updateItemDto: UpdateInterestDto,
+  ): Promise<Interest> {
     const role = await this.findOne(id);
     const updatedItem = { ...role, updateItemDto };
     return await this.repository.save(updatedItem);
