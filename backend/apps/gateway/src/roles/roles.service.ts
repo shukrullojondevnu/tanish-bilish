@@ -11,8 +11,8 @@ import { ClientProxy } from '@nestjs/microservices';
 export class RolesService {
   constructor(@Inject('AUTH_SERVICE') private client: ClientProxy) {}
 
-  create(createRoleDto: CreateRoleDto) {
-    return this.client.send('createRole', createRoleDto);
+  create(createItemDto: CreateRoleDto) {
+    return this.client.send('createRole', createItemDto);
   }
 
   findAll(query: PaginationSearchI<Role>) {
@@ -24,10 +24,10 @@ export class RolesService {
   }
 
   update(id: number, updateRoleDto: UpdateRoleDto) {
-    return `This action updates a #${id} role`;
+    return this.client.send('updateRole', { id, updateRoleDto });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} role`;
+    return this.client.send('removeRole', id);
   }
 }

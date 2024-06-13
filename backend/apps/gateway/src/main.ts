@@ -9,6 +9,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 // Import modules for swagger
 import { AuthModule } from './auth/auth.module';
 import { RolesModule } from './roles/roles.module';
+import { InterestsModule } from './interests/interests.module';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -28,7 +29,7 @@ async function bootstrap() {
     app,
     configForPublicApi,
     {
-      include: [AuthModule],
+      include: [AuthModule, InterestsModule],
     },
   );
   SwaggerModule.setup('api/public', app, publicedApiDocument);
@@ -43,7 +44,7 @@ async function bootstrap() {
     app,
     configForPrivateApi,
     {
-      include: [RolesModule],
+      include: [RolesModule, InterestsModule],
     },
   );
   SwaggerModule.setup('api/private', app, privateApiDocument);

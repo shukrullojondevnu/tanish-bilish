@@ -28,8 +28,11 @@ export class RolesController {
   }
 
   @MessagePattern('updateRole')
-  update(@Payload() updateRoleDto: UpdateRoleDto) {
-    return this.rolesService.update(updateRoleDto.id, updateRoleDto);
+  update(
+    @Payload()
+    { id, updateRoleDto }: { id: number; updateRoleDto: UpdateRoleDto },
+  ) {
+    return this.rolesService.update(id, updateRoleDto);
   }
 
   @MessagePattern('removeRole')

@@ -16,6 +16,9 @@ export class Role {
   @Column({ type: 'enum', enum: Roles, default: Roles.USER, unique: true })
   value: Roles;
 
+  @Column({ nullable: true })
+  description: string;
+
   @ManyToMany(() => User, (user) => user.roles, { cascade: true })
   @JoinColumn({ name: 'user_id' })
   users: User[];

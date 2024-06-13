@@ -29,8 +29,8 @@ export class RolesService {
 
   async update(id: number, updateItemDto: UpdateRoleDto): Promise<Role> {
     const role = await this.findOne(id);
-    const updatedItem = { ...role, updateItemDto };
-    return await this.repository.save(updatedItem);
+    const updatedItem = { ...role, ...updateItemDto };
+    return this.repository.save(updatedItem);
   }
 
   async remove(id: number) {
