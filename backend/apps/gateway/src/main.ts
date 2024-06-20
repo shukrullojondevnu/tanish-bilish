@@ -5,6 +5,7 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import compression from '@fastify/compress';
 
 // Import modules for swagger
 import { AuthModule } from './auth/auth.module';
@@ -49,6 +50,7 @@ async function bootstrap() {
   );
   SwaggerModule.setup('api/private', app, privateApiDocument);
 
+  await app.register(compression);
   await app.listen(3000);
 }
 bootstrap();

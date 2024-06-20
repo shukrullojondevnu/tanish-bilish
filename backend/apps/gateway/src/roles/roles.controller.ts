@@ -15,7 +15,7 @@ import {
   Role,
   UpdateRoleDto,
 } from '@app/share';
-import { ApiQuery, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Roles')
 @Controller('roles')

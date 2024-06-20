@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
+import { MessagePattern, Payload, RpcException } from '@nestjs/microservices';
 import { RolesService } from './roles.service';
 import {
   CreateRoleDto,
@@ -13,22 +13,25 @@ export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
 
   @MessagePattern('createRole')
-  create(@Payload() createRoleDto: CreateRoleDto) {
-    return this.rolesService.create(createRoleDto);
+  async create(@Payload() createRoleDto: CreateRoleDto) {
+    const result = await this.rolesService.create(createRoleDto);
+    if (!result) throw new RpcException('Bad request');
+    return result;
   }
 
   @MessagePattern('findAllRoles')
-  findAll(@Payload() query: PaginationSearchI<Role>) {
+  async findAll(@Payload() query: PaginationSearchI<Role>) {
     return this.rolesService.findAll(query);
   }
 
   @MessagePattern('findOneRole')
-  findOne(@Payload() id: number) {
-    return this.rolesService.findOne(id);
+  async findOne(@Payload() id: number) {
+    const result = await this.rolesService.findOne(id);
+    return result;
   }
 
   @MessagePattern('updateRole')
-  update(
+  async update(
     @Payload()
     { id, updateRoleDto }: { id: number; updateRoleDto: UpdateRoleDto },
   ) {
@@ -36,7 +39,7 @@ export class RolesController {
   }
 
   @MessagePattern('removeRole')
-  remove(@Payload() id: number) {
+  async remove(@Payload() id: number) {
     return this.rolesService.remove(id);
   }
 }
