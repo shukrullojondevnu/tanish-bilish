@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import { Role } from './role.entity';
 import { IsBoolean, IsDate, IsEmail, IsInt, IsString } from 'class-validator';
+import { Expose } from 'class-transformer';
 
 @Entity({ name: 'users' })
 export class User {
@@ -40,7 +41,7 @@ export class User {
   @Column({ default: false })
   verifed: boolean;
 
-  @IsString()
+  @Expose()
   @Column({ name: 'password_hash', nullable: true })
   passwordHash: string;
 
