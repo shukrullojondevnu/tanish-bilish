@@ -4,6 +4,7 @@ import { InfoService } from './info.service';
 import { InterestsModule } from './interests/interests.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Interest, UserInterest } from '@app/share';
+import { ProfileModule } from './profile/profile.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { Interest, UserInterest } from '@app/share';
       entities: [Interest, UserInterest],
       synchronize: true,
     }),
+    ProfileModule,
   ],
   controllers: [InfoController],
   providers: [InfoService],

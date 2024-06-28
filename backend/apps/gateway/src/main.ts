@@ -45,7 +45,7 @@ async function bootstrap() {
     app,
     configForPrivateApi,
     {
-      include: [RolesModule, InterestsModule],
+      include: [AuthModule, RolesModule, InterestsModule],
     },
   );
   SwaggerModule.setup('api/private', app, privateApiDocument);
