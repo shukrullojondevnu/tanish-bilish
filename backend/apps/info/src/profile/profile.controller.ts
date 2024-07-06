@@ -1,8 +1,7 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { ProfileService } from './profile.service';
-import { CreateProfileDto } from '../../../../libs/share/src/dtos/dto/create-profile.dto';
-import { UpdateProfileDto } from '../../../../libs/share/src/dtos/dto/update-profile.dto';
+import { CreateProfileDto, UpdateProfileDto } from '@app/share';
 
 @Controller()
 export class ProfileController {

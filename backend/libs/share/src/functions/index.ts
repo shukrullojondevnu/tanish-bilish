@@ -14,7 +14,7 @@ import {
   FindOperator,
 } from 'typeorm';
 
-export async function findAll(
+export async function findAllItems(
   repository: any,
   where: any,
   take: number,

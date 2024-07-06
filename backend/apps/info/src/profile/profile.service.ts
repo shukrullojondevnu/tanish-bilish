@@ -1,26 +1,43 @@
 import { Injectable } from '@nestjs/common';
-import { CreateProfileDto } from '../../../../libs/share/src/dtos/dto/create-profile.dto';
-import { UpdateProfileDto } from '../../../../libs/share/src/dtos/dto/update-profile.dto';
+import {
+  CreateProfileDto,
+  PaginationSearchI,
+  Profile,
+  UpdateProfileDto,
+  findAllItems,
+} from '@app/share';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class ProfileService {
-  create(createProfileDto: CreateProfileDto) {
-    return 'This action adds a new profile';
+  constructor(
+    @InjectRepository(Profile) private repository: Repository<Profile>,
+  ) {}
+
+  async create(createItemDto: CreateProfileDto): Promise<Profile> {
+    return this.repository.save(createItemDto);
   }
 
-  findAll() {
-    return `This action returns all profile`;
+  async findAll(
+    query: PaginationSearchI<Profile>,
+  ): Promise<[Profile[], number]> {
+    const { where, take, page } = query;
+
+    return findAllItems(this.repository, where, take, page);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} profile`;
+  async findOne(id: number): Promise<Profile | null> {
+    return this.repository.findOneBy({ id });
   }
 
-  update(id: number, updateProfileDto: UpdateProfileDto) {
-    return `This action updates a #${id} profile`;
+  async update(id: number, updateItemDto: UpdateProfileDto): Promise<Profile> {
+    const role = await this.findOne(id);
+    const updatedItem = { ...role, ...updateItemDto };
+    return this.repository.save(updatedItem);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} profile`;
+  async remove(id: number) {
+    return this.repository.delete(id);
   }
 }

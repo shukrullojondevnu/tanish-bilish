@@ -14,10 +14,14 @@ export * from './dtos/role/update-role.dto';
 // Interest dto
 export * from './dtos/interest/create-interest.dto';
 export * from './dtos/interest/update-interest.dto';
+// Profile dto
+export * from './dtos/profile/create-profile.dto';
+export * from './dtos/profile/update-profile.dto';
 
 // * Entities
 export * from './entities/role.entity';
 export * from './entities/user.entity';
 export * from './entities/interest.entity';
+export * from './entities/profile.entity';
 
 export * from './functions';
