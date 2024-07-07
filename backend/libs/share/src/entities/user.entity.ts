@@ -17,24 +17,12 @@ export class User {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @IsString()
-  @Column()
-  fullname: string;
-
   @IsEmail()
   @Column({ unique: true })
   email: string;
 
-  @IsString()
-  @Column()
-  phone: string;
-
-  @IsDate()
-  @Column()
-  birth: Date;
-
   @IsInt()
-  @Column({ unique: true })
+  @Column({ unique: true, nullable: true })
   profile: number;
 
   @IsBoolean()

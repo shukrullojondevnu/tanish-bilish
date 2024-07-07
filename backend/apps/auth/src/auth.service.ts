@@ -1,8 +1,9 @@
+import { CreateUserDto } from '@app/share';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuthService {
-  signIn() {}
+  async signIn(payload: CreateUserDto) {}
 
-  signUp() {}
+  async signUp(payload: CreateUserDto) {}
 }

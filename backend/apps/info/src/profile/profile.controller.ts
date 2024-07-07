@@ -1,34 +1,51 @@
 import { Controller } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
+import { MessagePattern, Payload, RpcException } from '@nestjs/microservices';
 import { ProfileService } from './profile.service';
-import { CreateProfileDto, UpdateProfileDto } from '@app/share';
+import {
+  CreateProfileDto,
+  PaginationSearchI,
+  Profile,
+  UpdateProfileDto,
+} from '@app/share';
 
 @Controller()
 export class ProfileController {
-  constructor(private readonly profileService: ProfileService) {}
+  constructor(private readonly profilesService: ProfileService) {}
 
   @MessagePattern('createProfile')
-  create(@Payload() createProfileDto: CreateProfileDto) {
-    return this.profileService.create(createProfileDto);
+  async create(@Payload() createProfileDto: CreateProfileDto) {
+    const result = await this.profilesService.create(createProfileDto);
+    if (!result) throw new RpcException('Bad request');
+    return result;
   }
 
-  @MessagePattern('findAllProfile')
-  findAll() {
-    return this.profileService.findAll();
+  @MessagePattern('findAllProfiles')
+  async findAll(@Payload() query: PaginationSearchI<Profile>) {
+    return this.profilesService.findAll(query);
   }
 
   @MessagePattern('findOneProfile')
-  findOne(@Payload() id: number) {
-    return this.profileService.findOne(id);
+  async findOne(@Payload() id: number) {
+    const result = await this.profilesService.findOne(id);
+    return result;
   }
 
   @MessagePattern('updateProfile')
-  update(@Payload() updateProfileDto: UpdateProfileDto) {
-    return this.profileService.update(updateProfileDto.id, updateProfileDto);
+  async update(
+    @Payload()
+    {
+      id,
+      updateProfileDto,
+    }: {
+      id: number;
+      updateProfileDto: UpdateProfileDto;
+    },
+  ) {
+    return this.profilesService.update(id, updateProfileDto);
   }
 
   @MessagePattern('removeProfile')
-  remove(@Payload() id: number) {
-    return this.profileService.remove(id);
+  async remove(@Payload() id: number) {
+    return this.profilesService.remove(id);
   }
 }

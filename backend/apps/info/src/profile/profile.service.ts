@@ -24,7 +24,7 @@ export class ProfileService {
   ): Promise<[Profile[], number]> {
     const { where, take, page } = query;
 
-    return findAllItems(this.repository, where, take, page);
+    return findAllItems(this.repository, where, take, page, true);
   }
 
   async findOne(id: number): Promise<Profile | null> {

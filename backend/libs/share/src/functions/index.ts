@@ -19,6 +19,7 @@ export async function findAllItems(
   where: any,
   take: number,
   page: number,
+  counted: boolean,
 ) {
   //Pagination values
   const t = take || 10;
@@ -36,6 +37,15 @@ export async function findAllItems(
       }
       findConditions[String(k1)] = And(...operArr);
     }
+  }
+
+  if (!counted) {
+    const result = await repository.find({
+      where: findConditions,
+      take: t,
+      skip: s,
+    });
+    return result;
   }
 
   const result = await repository.findAndCount({

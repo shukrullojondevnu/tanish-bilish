@@ -20,7 +20,7 @@ export class RolesService {
   async findAll(query: PaginationSearchI<Role>): Promise<[Role[], number]> {
     const { where, take, page } = query;
 
-    return findAllItems(this.repository, where, take, page);
+    return findAllItems(this.repository, where, take, page, false);
   }
 
   async findOne(id: number): Promise<Role | null> {

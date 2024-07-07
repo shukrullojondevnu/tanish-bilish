@@ -11,6 +11,7 @@ import compression from '@fastify/compress';
 import { AuthModule } from './auth/auth.module';
 import { RolesModule } from './roles/roles.module';
 import { InterestsModule } from './interests/interests.module';
+import { UsersModule } from './users/users.module';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -45,7 +46,7 @@ async function bootstrap() {
     app,
     configForPrivateApi,
     {
-      include: [AuthModule, RolesModule, InterestsModule],
+      include: [AuthModule, RolesModule, InterestsModule, UsersModule],
     },
   );
   SwaggerModule.setup('api/private', app, privateApiDocument);
