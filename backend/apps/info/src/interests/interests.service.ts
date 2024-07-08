@@ -6,7 +6,7 @@ import {
   CreateInterestDto,
   PaginationSearchI,
   UpdateInterestDto,
-  findAll,
+  findAllItems,
 } from '@app/share';
 
 @Injectable()
@@ -24,7 +24,7 @@ export class InterestsService {
   ): Promise<[Interest[], number]> {
     const { where, take, page } = query;
 
-    return findAll(this.repository, where, take, page);
+    return findAllItems(this.repository, where, take, page, true);
   }
 
   async findOne(id: number): Promise<Interest | null> {
