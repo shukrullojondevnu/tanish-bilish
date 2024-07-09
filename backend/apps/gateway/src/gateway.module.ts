@@ -5,9 +5,16 @@ import { RolesModule } from './roles/roles.module';
 import { AuthModule } from './auth/auth.module';
 import { InterestsModule } from './interests/interests.module';
 import { UsersModule } from './users/users.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [RolesModule, AuthModule, InterestsModule, UsersModule],
+  imports: [
+    RolesModule,
+    ConfigModule.forRoot(),
+    AuthModule,
+    InterestsModule,
+    UsersModule,
+  ],
   controllers: [GatewayController],
   providers: [GatewayService],
 })
