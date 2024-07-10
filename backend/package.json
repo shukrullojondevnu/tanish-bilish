@@ -22,7 +22,7 @@
   "dependencies": {
     "@apollo/server": "^4.10.4",
     "@as-integrations/fastify": "^2.1.1",
-    "@fastify/compress": "^7.0.3",
+    "@fastify/compress": "^6.5.0",
     "@fastify/static": "^7.0.4",
     "@nestjs/apollo": "^12.1.0",
     "@nestjs/common": "^10.0.0",

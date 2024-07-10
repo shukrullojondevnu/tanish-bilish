@@ -5,6 +5,8 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import compression from '@fastify/compress';
+import { constants } from 'zlib';
 
 // Import modules for swagger
 import { AuthModule } from './auth/auth.module';
@@ -50,6 +52,9 @@ async function bootstrap() {
   );
   SwaggerModule.setup('api/private', app, privateApiDocument);
 
+  await app.register(compression, {
+    brotliOptions: { params: { [constants.BROTLI_PARAM_QUALITY]: 4 } },
+  });
   await app.listen(3000);
 }
 bootstrap();
